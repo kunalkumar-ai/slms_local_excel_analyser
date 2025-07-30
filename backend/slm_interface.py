@@ -21,11 +21,3 @@ def send_prompt_to_slm(prompt: str, model: str = MODEL_NAME) -> str:
     except Exception as e:
         return f"Error communicating with SLM: {e}"
 
-def test_slm():
-    prompt = "What is the capital of Germany?"
-    print("Prompt:", prompt)
-    answer = send_prompt_to_slm(prompt)
-    print("Response:", answer)
-
-if __name__ == "__main__":
-    test_slm()
