@@ -31,7 +31,7 @@ def summarize_schema(df: pd.DataFrame) -> Dict[str, Any]:
     return summary
 
 
-def sample_data(df: pd.DataFrame, n: int = 5) -> pd.DataFrame:
+def sample_data(df: pd.DataFrame, n: int = 10) -> pd.DataFrame:
     """
     Returns the first n rows of the DataFrame as a sample.
     """
@@ -44,7 +44,9 @@ if __name__ == "__main__":
         print("Usage: python excel_loader.py <excel_file>")
         sys.exit(1)
     file_path = sys.argv[1]
-    print(f"Sheet names: {get_sheet_names(file_path)}")
-    df = load_excel(file_path)
+    sheets = get_sheet_names(file_path)
+    print(f"Sheet names: {sheets}")
+    # Always load the first sheet for demo
+    df = load_excel(file_path, sheet_name=sheets[0])
     print("Schema summary:", summarize_schema(df))
     print("Sample data:\n", sample_data(df))
