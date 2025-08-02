@@ -16,9 +16,9 @@ Sample data:
 Question: {question}
 
 IMPORTANT: If the question refers to a specific value (e.g., a month or region), always filter the DataFrame for that value before aggregating or summarizing.Do NOT provide any additional instructions, meta-questions, or explanations.
-
-
 Respond ONLY with a valid Pandas code snippet that can be executed on the DataFrame 'df'. Do NOT include explanations.
+
+Always provide the complete code (including imports and plotting commands) in a single Python code block.
 
 Always assign your answer to a variable named result and print it using print(result).
 
@@ -28,28 +28,35 @@ Always assign your answer to a variable named result and print it using print(re
 
 def extract_pandas_code(response: str) -> str:
     """
-    Extract the largest (full) Python code block from the SLM response.
-    If no code block is found, fallback to all lines that look like code.
+    Extract and concatenate all code blocks from the SLM response.
+    Handles both ```python and ``` blocks.
+    If no code block is found, fallback to a simple heuristic.
     """
-    # Try to extract the largest python code block
-    code_blocks = re.findall(r'```python(.*?)```', response, re.DOTALL)
+    import re
+
+    # Regex to find all code blocks, with or without 'python'
+    code_blocks = re.findall(r'```(?:python)?\s*([\s\S]*?)\s*```', response, re.DOTALL)
+
     if code_blocks:
-        # Return the largest code block (in case there are multiple)
-        return max((cb.strip() for cb in code_blocks), key=len)
-    # Fallback: extract all contiguous indented or code-like lines
+        # Concatenate all found code blocks, stripping whitespace from each
+        full_code = "\n".join(block.strip() for block in code_blocks).strip()
+        if full_code:
+            return full_code
+
+    # Fallback if no code blocks are found or they are empty
     lines = response.strip().split('\n')
     code_lines = []
-    in_code = False
     for line in lines:
-        if line.strip() == '' and in_code:
-            break
-        if (('df' in line and ('[' in line or '.' in line)) or 'plt' in line or 'pd.' in line or 'np.' in line or 'sns.' in line):
-            in_code = True
+        stripped = line.strip()
+        # Heuristic for what looks like a code line
+        if (
+            stripped.startswith(('df', 'plt.', 'pd.', 'np.', 'sns.')) or
+            ('=' in stripped and not stripped.startswith('#'))
+        ):
             code_lines.append(line)
-        elif in_code:
-            # End of code block
-            break
+
     if code_lines:
         return '\n'.join(code_lines)
-    # Fallback: return the whole response
+
+    # Final fallback: return the whole response stripped, as it might be a single line of code
     return response.strip()
