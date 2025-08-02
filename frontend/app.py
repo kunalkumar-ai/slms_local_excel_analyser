@@ -51,7 +51,8 @@ if uploaded_file:
     schema = excel_loader.summarize_schema(df)
     st.session_state.schema = schema
     # Sample data
-    sample = df.head(10)
+    # Sample data (use backend function for consistency)
+    sample = excel_loader.sample_data(df, n=10)
     st.session_state.sample = sample
     # Show schema and sample
     st.subheader("Schema summary")

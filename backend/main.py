@@ -88,9 +88,9 @@ def main():
             "int": int,
             "str": str,
             "bool": bool,
-    "type": type,
-    "isinstance": isinstance,
-}
+            "type": type,
+            "isinstance": isinstance,
+        }
         local_vars = {"df": df}
         exec(
             pandas_code_clean,
