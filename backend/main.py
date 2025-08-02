@@ -72,8 +72,25 @@ def main():
             "len": len,
             "sum": sum,
             "abs": abs,
-            "range": range
-        }
+            "range": range,
+            "round": round,
+            "sorted": sorted,
+            "enumerate": enumerate,
+            "zip": zip,
+            "map": map,
+            "filter": filter,
+            "any": any,
+            "all": all,
+            "list": list,
+            "dict": dict,
+            "set": set,
+            "float": float,
+            "int": int,
+            "str": str,
+            "bool": bool,
+    "type": type,
+    "isinstance": isinstance,
+}
         local_vars = {"df": df}
         exec(
             pandas_code_clean,

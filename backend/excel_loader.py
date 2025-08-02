@@ -35,7 +35,7 @@ def sample_data(df: pd.DataFrame, n: int = 10) -> pd.DataFrame:
     """
     Returns the first n rows of the DataFrame as a sample.
     """
-    return df.head(n)
+    return df.sample(n=min(n, len(df)), random_state=42)
 
 
 if __name__ == "__main__":

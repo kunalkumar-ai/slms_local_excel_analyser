@@ -19,6 +19,10 @@ IMPORTANT: If the question refers to a specific value (e.g., a month or region),
 
 
 Respond ONLY with a valid Pandas code snippet that can be executed on the DataFrame 'df'. Do NOT include explanations.
+
+Always assign your answer to a variable named result and print it using print(result).
+
+
 """
     return prompt
 

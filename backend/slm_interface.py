@@ -1,7 +1,7 @@
 import requests
 
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "phi3"
+MODEL_NAME = "llama3"
 
 def send_prompt_to_slm(prompt: str, model: str = MODEL_NAME) -> str:
     """
