@@ -13,8 +13,8 @@ import excel_loader
 import question_parser
 import slm_interface
 
-st.set_page_config(page_title="Local Excel Data Analyst", layout="wide")
-st.title("🔒 Local Excel Data Analyst")
+st.set_page_config(page_title="ExcelSense", layout="wide")
+st.title("ExcelSense")
 
 # Session state for file and dataframe
 def get_state():
@@ -63,7 +63,7 @@ if uploaded_file:
 if st.session_state.df is not None:
     st.markdown("---")
     st.subheader("Ask a question about your data:")
-    user_question = st.text_input("Natural language question", "e.g. plot the profit for January month")
+    user_question = st.text_input("Your Question", "Describe data")
     if st.button("Submit question") and user_question.strip():
         # Build prompt
         prompt = question_parser.build_prompt(

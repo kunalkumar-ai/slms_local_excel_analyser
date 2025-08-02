@@ -34,8 +34,8 @@ def extract_pandas_code(response: str) -> str:
     """
     import re
 
-    # Regex to find all code blocks, with or without 'python'
-    code_blocks = re.findall(r'```(?:python)?\s*([\s\S]*?)\s*```', response, re.DOTALL)
+    # Regex to find all code blocks, with or without 'python', case-insensitive
+    code_blocks = re.findall(r'```(?:python)?\s*([\s\S]*?)\s*```', response, re.IGNORECASE | re.DOTALL)
 
     if code_blocks:
         # Concatenate all found code blocks, stripping whitespace from each
