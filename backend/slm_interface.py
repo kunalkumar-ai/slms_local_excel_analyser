@@ -2,7 +2,6 @@ import requests
 
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3"
-
 def send_prompt_to_slm(prompt: str, model: str = MODEL_NAME) -> str:
     """
     Send a prompt to the local Ollama server running the specified model.
@@ -12,6 +11,9 @@ def send_prompt_to_slm(prompt: str, model: str = MODEL_NAME) -> str:
         "model": model,
         "prompt": prompt,
         "stream": False
+
+
+
     }
     try:
         response = requests.post(OLLAMA_API_URL, json=payload)
